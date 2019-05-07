@@ -39,6 +39,7 @@ function getBiciStatus(numeroId2) {
         }
       }
       createNewArray(availableStations);
+      $('#spinner').remove(`#spinner`)
       printNewArray(finalArray);
     }
   }
@@ -73,6 +74,7 @@ function createNewArray(availableStations) {
 // FUNCION PRINT
 
 function printNewArray(availableStations) {
+
   console.log(infoStations);
   console.log(availableStations);
   console.log(finalArray);
@@ -116,6 +118,10 @@ function converterTime (time){
 // BINDS Y EVENTOS
 
 botonAñadir.addEventListener('click', function() {
+$('#spinner').append(`<div class="spinner-border" role="status">
+                    <p>Loading...</p>
+                    <span class="sr-only">Loading...</span>
+                    </div>`);
   let numeroId = document.querySelectorAll('#input')[0].value;
   getBiciInfo();
 })
