@@ -85,7 +85,7 @@ function printNewArray(availableStations) {
       <th scope="col">Last Update</th>
       <th scope="col">Lat</th>
       <th scope="col">Lon</th>
-    </tr></br>`
+    </tr>`
 
   for (var i = 0; i < finalArray.length; i++) {
     tableBody.innerHTML += `
@@ -94,13 +94,25 @@ function printNewArray(availableStations) {
       <td>${finalArray[i].e_bikes}</td>
       <td>${finalArray[i].Mechanical}</td>
       <td>${finalArray[i].total}</td>
-      <td>${finalArray[i].update}</td>
+      <td>${converterTime(finalArray[i].update)}</td>
       <td>${finalArray[i].lat}</td>
       <td>${finalArray[i].lon}</td>
     </tr>`
   }
 }
+// FUNCION converterTime
 
+
+function converterTime (time){
+
+  var date = new Date(time*1000);
+  var hours = date.getHours();
+  var minutes = "0" + date.getMinutes();
+  var seconds = "0" + date.getSeconds();
+  var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+  return formattedTime;
+}
 // BINDS Y EVENTOS
 
 botonAñadir.addEventListener('click', function() {
