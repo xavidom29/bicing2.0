@@ -80,13 +80,13 @@ function printNewArray(availableStations) {
   console.log(finalArray);
   tableBody.innerHTML += `
     <tr>
-      <th scope="col">Street</th>
+      <th scope="col">Street Station</th>
       <th scope="col">e-Bikes</th>
       <th scope="col">Mechanical</th>
-      <th scope="col">TOTAL</th>
+      <th scope="col">Total</th>
       <th scope="col">Last Update</th>
-      <th scope="col">Lat</th>
-      <th scope="col">Lon</th>
+      <th scope="col">coordinates</th>
+
     </tr>`
 
   for (var i = 0; i < finalArray.length; i++) {
@@ -97,8 +97,8 @@ function printNewArray(availableStations) {
       <td>${finalArray[i].Mechanical}</td>
       <td>${finalArray[i].total}</td>
       <td>${converterTime(finalArray[i].update)}</td>
-      <td>${finalArray[i].lat}</td>
-      <td>${finalArray[i].lon}</td>
+      <td>${finalArray[i].lat} N ,${finalArray[i].lon} E</td>
+
     </tr>`
   }
 }
@@ -110,9 +110,7 @@ function converterTime (time){
   var date = new Date(time*1000);
   var hours = date.getHours();
   var minutes = "0" + date.getMinutes();
-  var seconds = "0" + date.getSeconds();
-  var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
+  var formattedTime = hours + ':' + minutes.substr(-2);
   return formattedTime;
 }
 // BINDS Y EVENTOS
@@ -122,6 +120,5 @@ $('#spinner').append(`<div class="spinner-border" role="status">
                     <p>Loading...</p>
                     <span class="sr-only">Loading...</span>
                     </div>`);
-  let numeroId = document.querySelectorAll('#input')[0].value;
   getBiciInfo();
 })
