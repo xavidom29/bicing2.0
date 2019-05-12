@@ -3,7 +3,7 @@ let availableStations = [];
 let infoStations = [];
 let finalArray = []
 
-const botonAñadir = document.querySelectorAll('#boton')[0];
+const botonGo = document.querySelectorAll('#boton')[0];
 const tableBody = document.querySelectorAll('#tabla')[0];
 
 //  FUNCTION BICI INFO
@@ -41,6 +41,12 @@ function getBiciStatus(numeroId2) {
       createNewArray(availableStations);
       $('#spinner').remove(`#spinner`)
       printNewArray(finalArray);
+      $('#boton').remove(`#boton`)
+      $('#boton').append(`<button type="button" class="btn btn-outline-light" id="boton2">R e f r e s h !</button>`)
+      const botonRefresh = document.querySelectorAll('#boton2')[0];
+      botonRefresh.addEventListener('click', function() {
+        getBiciInfo();
+      })
     }
   }
   requester2.open("GET", "https://cors-anywhere.herokuapp.com/https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_status");
@@ -78,7 +84,7 @@ function printNewArray(availableStations) {
   console.log(infoStations);
   console.log(availableStations);
   console.log(finalArray);
-  tableBody.innerHTML += `
+  tableBody.innerHTML = `
     <tr>
       <th scope="col">Street Station</th>
       <th scope="col">e-Bikes</th>
@@ -115,7 +121,7 @@ function converterTime (time){
 }
 // BINDS Y EVENTOS
 
-botonAñadir.addEventListener('click', function() {
+botonGo.addEventListener('click', function() {
 $('#spinner').append(`<div class="spinner-border" role="status">
                     <p>Loading...</p>
                     <span class="sr-only">Loading...</span>
